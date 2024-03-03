@@ -1,0 +1,23 @@
+{
+    "root": true,
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "jest/valid-title" : "off",
+      "react-hooks/exhaustive-deps": "off",
+      "testing-library/prefer-query-by-disappearance": "off",
+      "testing-library/no-wait-for-multiple-assertions": "off",
+      "testing-library/prefer-presence-queries": "off",
+      "testing-library/no-node-access": "off",
+      "jsx-a11y/alt-text": "off",
+      "jsx-a11y/anchor-is-valid": "off",
+      "testing-library/no-render-in-setup": "off"
+    },
+    "env": {
+      "browser": true,
+      "jasmine": true,
+      "jest": true
+    }
+  }

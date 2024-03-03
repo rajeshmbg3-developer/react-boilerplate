@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "strict": false,
+      "strictPropertyInitialization": false,
+      "resolveJsonModule": false,
+    }
+}
