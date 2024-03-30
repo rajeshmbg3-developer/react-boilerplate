@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { RouteType } from "src/models";
+import { RouteType } from "./routes.types";
 import RouteElementWrapper from "src/routes/RouteElementWrapper";
 import { AuthRoutesMap, PublicRoutesMap, ROOT_PATH, RouterConfig } from "src/routes/config";
 

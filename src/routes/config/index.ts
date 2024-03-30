@@ -1,5 +1,5 @@
 import Login from "src/auth-layout/Login/Login";
-import { RouteType } from "src/models";
+import { RouteType } from "../routes.types";
 import PageNotFound from "src/pages/PageNotFound/PageNotFound";
 
 export const ROOT_PATH = "/";

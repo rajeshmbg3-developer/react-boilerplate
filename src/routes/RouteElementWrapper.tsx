@@ -1,4 +1,4 @@
-import { RouteType } from "src/models";
+import { RouteType } from "./routes.types";
 
 const RouteElementWrapper = (routeItem: RouteType): JSX.Element => {
   const { component: RouteComponent } = routeItem;
