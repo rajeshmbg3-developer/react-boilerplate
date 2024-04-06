@@ -5,53 +5,37 @@ import {
   CardContent,
   Checkbox,
   Divider,
-  FormControl,
   FormControlLabel,
-  FormHelperText,
   Grid,
-  IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useCallback } from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import Twitter from "@mui/icons-material/Twitter";
 import GitHub from "@mui/icons-material/GitHub";
 import Link from "@mui/material/Link";
-import { Lock, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Lock } from "@mui/icons-material";
 import { deepPurple } from "@mui/material/colors";
 import { useForm } from "react-hook-form";
 import { loginformValidation } from "src/utils/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DevTool } from "@hookform/devtools";
-import useLoginStyle from "./Login.styles";
 import { useNavigate } from "react-router-dom";
 import { PublicRoutesMap } from "src/routes/config";
+import { SimpleInput } from "src/components/FromComponents";
 
 export type LoginType = {
   email: string;
   password: string;
 };
 
-const Login: React.FC = () => {
-  const classes = useLoginStyle();
+const Login: React.FC = (): JSX.Element => {
   const navigateTo = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => {
-    setShowPassword((show) => !show);
-  };
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
 
   const resolver = yupResolver(loginformValidation);
   const {
     control,
     formState: { errors },
-    register,
     handleSubmit,
   } = useForm<LoginType>({
     defaultValues: {
@@ -62,11 +46,11 @@ const Login: React.FC = () => {
     resolver,
   });
 
-  const onSubmit = (data: LoginType): void => {
+  const onSubmit = useCallback((data: LoginType): void => {
     console.info("LOGIN SUCCESSFUL", data);
     const pageNotFound = PublicRoutesMap.PAGE_NOT_FOUND.absolutePath;
     navigateTo(pageNotFound);
-  };
+  }, []);
 
   return (
     <div className="flex items-center justify-center min-h-screen p-6">
@@ -97,43 +81,23 @@ const Login: React.FC = () => {
                 </Typography>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  fullWidth
+                <SimpleInput
+                  inputId="login-form-email-input"
+                  name="email"
+                  control={control}
+                  error={errors.email}
                   label="Email"
-                  {...register("email")}
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                ></TextField>
+                />
               </Grid>
               <Grid item xs={12}>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-password" error={!!errors.password}>
-                    Password
-                  </InputLabel>
-                  <OutlinedInput
-                    id="outlined-adornment-password"
-                    type={showPassword ? "text" : "password"}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="Password"
-                    {...register("password")}
-                    error={!!errors.password}
-                  />
-                  <FormHelperText className={errors.password && classes.errorTextColor}>
-                    {errors.password ? errors.password.message : ""}
-                  </FormHelperText>
-                </FormControl>
+                <SimpleInput
+                  inputId="login-form-password-input"
+                  name="password"
+                  control={control}
+                  error={errors.password}
+                  isPasswordField
+                  label="Password"
+                />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel value="Remember me" control={<Checkbox />} label="Remember me" labelPlacement="end" />
