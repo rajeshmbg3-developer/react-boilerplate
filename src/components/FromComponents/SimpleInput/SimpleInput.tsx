@@ -1,4 +1,12 @@
-import { FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, OutlinedInput } from "@mui/material";
+import {
+  FormControl,
+  FormHelperText,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 import { useController } from "react-hook-form";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
@@ -62,7 +70,7 @@ const SimpleInput: React.FC<SimpleInputType> = ({
     type = showPassword ? "text" : "password";
   }
 
-  return (
+  return variant === "outlined" ? (
     <FormControl fullWidth={fullWidth} variant={variant}>
       {label && (
         <InputLabel htmlFor="outlined-adornment-password" error={!!error?.message}>
@@ -84,9 +92,25 @@ const SimpleInput: React.FC<SimpleInputType> = ({
         autoFocus={autoFocus}
       />
       <FormHelperText className={error?.message && classes.errorTextColor}>
-        {error?.message ? error?.message : ""}
+        {error ? error?.message : ""}
       </FormHelperText>
     </FormControl>
+  ) : (
+    <TextField
+      data-testid={dataTestId}
+      id={inputId}
+      disabled={disabled}
+      variant={variant}
+      fullWidth={fullWidth}
+      placeholder={placeHolder}
+      type={type}
+      label={label}
+      inputRef={ref}
+      {...inputProp}
+      error={!!error?.message}
+      helperText={error?.message}
+      autoFocus={autoFocus}
+    ></TextField>
   );
 };
 
