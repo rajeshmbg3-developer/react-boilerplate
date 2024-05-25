@@ -22,7 +22,7 @@ const constructRouteMap = (configChildern: RouteType[] | undefined): JSX.Element
     return (
       <Route
         key={`AppRoute-${id}`}
-        path={isRelativeRoute ? `${path?.pathId}/*` : path?.pathId}
+        path={isRelativeRoute ? `${path?.pathId}/*` : path?.absolutePath}
         element={<RouteElementWrapper {...routeItem} />}
       />
     );

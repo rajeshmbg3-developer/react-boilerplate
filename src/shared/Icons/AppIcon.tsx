@@ -3,6 +3,7 @@ import * as Icons from "./Icons";
 
 export const IconsMap = {
   pageNotFound: Icons.PageNotFound,
+  home: Icons.Home,
 };
 
 export type IconsNameType = keyof typeof IconsMap;

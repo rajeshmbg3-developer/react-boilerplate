@@ -21,7 +21,7 @@ import { loginformValidation } from "src/utils/validations";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DevTool } from "@hookform/devtools";
 import { useNavigate } from "react-router-dom";
-import { PublicRoutesMap } from "src/routes/config";
+import { PrivateRoutesMap } from "src/routes/config";
 import { SimpleInput } from "src/components/FromComponents";
 
 export type LoginType = {
@@ -48,8 +48,8 @@ const Login: React.FC = (): JSX.Element => {
 
   const onSubmit = useCallback((data: LoginType): void => {
     console.info("LOGIN SUCCESSFUL", data);
-    const pageNotFound = PublicRoutesMap.PAGE_NOT_FOUND.absolutePath;
-    navigateTo(pageNotFound);
+    const portfolio = PrivateRoutesMap.PORTFOLIO.absolutePath;
+    navigateTo(portfolio);
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-export type PermissionType = "admin" | "super_admin" | "public";
+export type PermissionType = "admin" | "super_admin" | "public" | "private";
 export type RouteType = {
   id: string;
   component?: React.ElementType;
@@ -7,7 +7,7 @@ export type RouteType = {
   title?: string;
   iconName?: string; //IconNameType
   isRelativeRoute?: boolean;
-  permission: PermissionType[];
+  permission?: PermissionType[];
   children?: RouteType[];
   showInSideNavigation: boolean;
 };
