@@ -1,10 +1,26 @@
-import { Box, Typography, CssBaseline, AppBar, Toolbar, IconButton, Button } from "@mui/material";
-// import { useState } from "react";
+import {
+  Box,
+  Typography,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+  Drawer,
+} from "@mui/material";
+import { useState } from "react";
 import usePorfolioStyles from "src/pages/Portfolio/Portfolio.styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavItemsType, PathType } from "src/constants";
 import { useNavigate } from "react-router-dom";
 import { AuthRoutesMap, PrivateRoutesMap, PublicRoutesMap } from "src/routes/config";
+
+const drawerWidth = 240;
 
 type PageHeaderProps = {
   navItems: NavItemsType[];
@@ -13,9 +29,10 @@ type PageHeaderProps = {
 const PageHeader: React.FC<PageHeaderProps> = ({ navItems }) => {
   const classes = usePorfolioStyles();
   const navigateTo = useNavigate();
-  // const [mobileOpen, setMobileOpen] = useState(false);
+  const container = window !== undefined ? () => window.document.body : undefined;
+  const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
-    // setMobileOpen((prevState) => !prevState);
+    setMobileOpen((prevState) => !prevState);
   };
 
   const combinedRoutesMap = {
@@ -28,6 +45,25 @@ const PageHeader: React.FC<PageHeaderProps> = ({ navItems }) => {
     const route = isRelativeRoute ? combinedRoutesMap[path]?.pathId : combinedRoutesMap[path].absolutePath;
     navigateTo(route);
   };
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        Rajesh
+      </Typography>
+      <Divider />
+      <List>
+        {navItems.map(({ key, label, icon, path, isRelativeRoute }) => (
+          <ListItem onClick={() => handleNavItemClick(path, isRelativeRoute!)} key={key} disablePadding>
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText primary={label} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
     <Box className={classes.flex}>
       <CssBaseline />
@@ -60,6 +96,23 @@ const PageHeader: React.FC<PageHeaderProps> = ({ navItems }) => {
           </Box>
         </Toolbar>
       </AppBar>
+      <nav>
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </nav>
       <Box component="main">
         <Toolbar />
       </Box>

@@ -23,6 +23,7 @@ import { DevTool } from "@hookform/devtools";
 import { useNavigate } from "react-router-dom";
 import { PrivateRoutesMap } from "src/routes/config";
 import { SimpleInput } from "src/components/FromComponents";
+import useLoginStyle from "src/auth-layout/Login/Login.styles";
 
 export type LoginType = {
   email: string;
@@ -31,7 +32,7 @@ export type LoginType = {
 
 const Login: React.FC = (): JSX.Element => {
   const navigateTo = useNavigate();
-
+  const classes = useLoginStyle();
   const resolver = yupResolver(loginformValidation);
   const {
     control,
@@ -55,7 +56,7 @@ const Login: React.FC = (): JSX.Element => {
   return (
     <div className="flex items-center justify-center min-h-screen p-6">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Card variant="elevation" className="w-[28rem]">
+        <Card variant="elevation" className={classes.minWidth}>
           <CardContent className="!p-10">
             <Grid container spacing={2}>
               <Grid item xs={12}>
