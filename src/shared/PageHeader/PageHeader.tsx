@@ -12,6 +12,7 @@ import {
   IconButton,
   Button,
   Drawer,
+  Avatar,
 } from "@mui/material";
 import { useState } from "react";
 import usePorfolioStyles from "src/pages/Portfolio/Portfolio.styles";
@@ -48,9 +49,9 @@ const PageHeader: React.FC<PageHeaderProps> = ({ navItems }) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Rajesh
-      </Typography>
+      <Avatar sx={{ my: 2 }}>
+        <img src={`${process.env.PUBLIC_URL}/img/rajesh.jpg`} alt="R" />
+      </Avatar>
       <Divider />
       <List>
         {navItems.map(({ key, label, icon, path, isRelativeRoute }) => (
@@ -84,7 +85,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({ navItems }) => {
               key={"app-home-profile"}
               sx={{ color: "#fff" }}
             >
-              <Typography variant="h6">Rajesh Malakar</Typography>
+              <Avatar>
+                <img src={`${process.env.PUBLIC_URL}/img/rajesh.jpg`} alt="R" />
+              </Avatar>
+              <Typography className="pl-4" variant="h6">
+                Rajesh Malakar
+              </Typography>
             </Button>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>

@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import AppIcon from "src/shared/Icons/AppIcon";
 
@@ -7,15 +7,18 @@ const PageNotFound: React.FC = () => {
   const gotoHome = () => navigateTo("/");
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="w-1/3">
-        <AppIcon name="pageNotFound" />
-        <br />
-        <div className="flex items-center justify-center">
-          <Button variant="text" size="large" type="submit" onClick={gotoHome}>
+      <Grid container>
+        <Grid md={3} lg={4} xs></Grid>
+        <Grid item container direction="column" md={6} lg={4} xs={12}>
+          <AppIcon name="pageNotFound" />
+        </Grid>
+        <Grid md={3} lg={4} xs></Grid>
+        <Grid item container direction="column">
+          <Button fullWidth variant="text" size="small" type="submit" onClick={gotoHome}>
             {"<< Go back to Homepage"}
           </Button>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     </div>
   );
 };
