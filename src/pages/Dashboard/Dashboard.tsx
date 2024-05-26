@@ -1,4 +1,4 @@
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   return <div> dashboard page works! </div>;
 };
 
